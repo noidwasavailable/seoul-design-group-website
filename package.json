@@ -1,17 +1,29 @@
 {
-  "name": "",
-  "type": "module",
-  "version": "0.0.1",
-  "engines": {
-    "node": ">=22.12.0"
-  },
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "astro": "^6.0.8"
-  }
+	"name": "seoul-design-group-website",
+	"type": "module",
+	"version": "0.0.1",
+	"engines": {
+		"node": ">=22.12.0"
+	},
+	"scripts": {
+		"dev": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro",
+		"lint": "biome check --write ."
+	},
+	"dependencies": {
+		"@astrojs/sitemap": "^3.7.1",
+		"@resvg/resvg-js": "^2.6.2",
+		"@tailwindcss/vite": "^4.2.2",
+		"astro": "^6.0.8",
+		"lodash.kebabcase": "^4.1.1",
+		"satori": "^0.26.0",
+		"slugify": "^1.6.8",
+		"tailwindcss": "^4.2.2"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.4.9",
+		"@types/lodash.kebabcase": "^4.1.9"
+	}
 }
