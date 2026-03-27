@@ -9,7 +9,10 @@ type ImageWithMetaData = {
 const DEFAULT_PHOTO_GRID_COL_COUNT = 4;
 const DEFAULT_MINIMUM_BIG_PHOTO_COUNT = 3;
 
-const fn = (images: ImageWithMetaData[], colCount: number = DEFAULT_PHOTO_GRID_COL_COUNT) => {
+const fn = (
+	images: ImageWithMetaData[],
+	colCount: number = DEFAULT_PHOTO_GRID_COL_COUNT,
+) => {
 	const COLS = colCount;
 	const ROWS = Math.ceil(
 		(images.length + DEFAULT_MINIMUM_BIG_PHOTO_COUNT) / COLS,
@@ -124,18 +127,18 @@ const fn = (images: ImageWithMetaData[], colCount: number = DEFAULT_PHOTO_GRID_C
 		}
 	}
 
-			// Fit optimization pass: swap mismatched orientations
-			const mismatchedWide = [...wideSet].filter((i) => images[i].isPortrait);
-			const mismatchedTall = [...tallSet].filter((i) => images[i].isLandscape);
+	// Fit optimization pass: swap mismatched orientations
+	const mismatchedWide = [...wideSet].filter((i) => images[i].isPortrait);
+	const mismatchedTall = [...tallSet].filter((i) => images[i].isLandscape);
 
-			const swapCount = Math.min(mismatchedWide.length, mismatchedTall.length);
-			for (let k = 0; k < swapCount; k++) {
-				const i = mismatchedWide[k];
-				const j = mismatchedTall[k];
-				const temp = images[i];
-				images[i] = images[j];
-				images[j] = temp;
-			}
+	const swapCount = Math.min(mismatchedWide.length, mismatchedTall.length);
+	for (let k = 0; k < swapCount; k++) {
+		const i = mismatchedWide[k];
+		const j = mismatchedTall[k];
+		const temp = images[i];
+		images[i] = images[j];
+		images[j] = temp;
+	}
 	return {
 		wideSet,
 		tallSet,

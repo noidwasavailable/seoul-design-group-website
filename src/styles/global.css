@@ -39,5 +39,5 @@
 /* Source: https://piccalil.li/blog/a-more-modern-css-reset/ */
 /* Anything that has been anchored to should have extra scroll margin */
 :target {
-  scroll-margin-block: 1rem;
+	scroll-margin-block: 1rem;
 }

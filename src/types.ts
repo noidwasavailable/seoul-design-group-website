@@ -10,8 +10,8 @@ const httpUrl = z.url({
 export const sdgEventSchema = z.object({
 	title: z.string(),
 	type: sdgEventTypeSchema,
-  date: z.coerce.date(),
-  author: z.string(),
+	date: z.coerce.date(),
+	author: z.string(),
 	authorLink: httpUrl.optional(),
 	location: z.string().optional(),
 	mapLink: httpUrl.optional(),
