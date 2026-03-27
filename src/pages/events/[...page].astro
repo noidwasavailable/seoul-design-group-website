@@ -1,0 +1,26 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Main from "@/layouts/Main.astro";
+import { SITE } from "@/config";
+import getSortedPosts from "@/utils/getSortedPosts";
+import Card from "@/components/Card.astro";
+
+export const getStaticPaths = (async ({ paginate }) => {
+	const events = await getCollection("events");
+	return paginate(getSortedPosts(events), { pageSize: SITE.postPerPage });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+---
+
+<Layout title={`Events | ${SITE.title}`}>
+    <Header />
+    <Main pageTitle={`Events`} pageDesc="Events hosted by Seoul Design Group">
+        <ul>
+            {page.data.map(data => <Card {...data} />)}
+        </ul>
+    </Main>
+</Layout>

@@ -1,0 +1,132 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import { SITE } from "@/config";
+import IconExternalLink from "@/assets/icons/IconExternalLink.svg";
+
+const LUMA_URL = "https://luma.com/calendar/cal-2e5leJwucrlzWzm";
+---
+
+<Layout title={`About | ${SITE.title}`} description="Learn about Seoul Design Group — a community of designers, artists, and creatives based in Seoul, Korea.">
+	<Header />
+	<Breadcrumb />
+
+	<main id="main-content" class="app-layout pb-20">
+		<!-- Intro -->
+		<header class="pt-8 pb-10 border-b border-border">
+			<h1 class="text-3xl sm:text-4xl font-bold text-foreground leading-tight mb-5">
+				About Seoul Design Group
+			</h1>
+			<p class="text-lg sm:text-xl leading-relaxed text-foreground/70 max-w-2xl">
+				We're a group of designers, artists, developers, and creatives who live and work in Seoul.
+				We meet up to share ideas, show our work, and get inspired by each other.
+			</p>
+		</header>
+
+		<!-- Mission -->
+		<section class="py-12 border-b border-border">
+			<h2 class="text-2xl font-semibold text-foreground mb-4">Why We Exist</h2>
+			<div class="space-y-4 text-foreground/80 leading-relaxed max-w-2xl">
+				<p>
+					Most of us work from home, heads down in our own projects. Same craft, same workflows, same way of solving things.
+					After a while you realise you've only been exposed to your own work.
+				</p>
+				<p>
+					Designers aren't so different from artists — we need to expose ourselves to other ways of thinking.
+					Seoul Design Group exists to create those moments of fresh air.
+					A room full of talented people from different backgrounds, exchanging ideas and inspiration.
+				</p>
+			</div>
+		</section>
+
+		<!-- What We Do -->
+		<section class="py-12 border-b border-border">
+			<h2 class="text-2xl font-semibold text-foreground mb-4">What We Do</h2>
+			<div class="space-y-4 text-foreground/80 leading-relaxed max-w-2xl">
+				<p>
+					We organise casual creative meetups in Seoul — informal evenings where people show their work, do small demos,
+					and just exchange ideas over good coffee. No presentations, no pressure. Just real conversations between creatives.
+				</p>
+				<p>
+					All our events are free and open to everyone. We announce them on Luma — follow our calendar to stay in the loop:
+				</p>
+				<a
+					href={LUMA_URL}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center gap-2 text-accent font-medium hover:underline underline-offset-4 transition-colors"
+				>
+					Seoul Design Group on Luma
+					<IconExternalLink class="size-3.5 opacity-60" />
+				</a>
+			</div>
+		</section>
+
+		<!-- Who It's For -->
+		<section class="py-12 border-b border-border">
+			<h2 class="text-2xl font-semibold text-foreground mb-4">Who This Is For</h2>
+			<div class="space-y-4 text-foreground/80 leading-relaxed max-w-2xl">
+				<p>
+					If you're a creative in Seoul — whether you're a graphic designer, UX researcher, motion designer,
+					3D artist, developer, art director, illustrator, photographer, or simply curious —
+					this community is for you.
+				</p>
+				<p>
+					We're people from all over the world who ended up in Seoul and wanted to connect with others who care about good design.
+				</p>
+			</div>
+		</section>
+
+		<!-- Sponsors -->
+		<section class="py-12 border-b border-border">
+			<h2 class="text-2xl font-semibold text-foreground mb-4">Sponsors</h2>
+			<div class="space-y-4 text-foreground/80 leading-relaxed max-w-2xl">
+				<p>
+					Seoul Design Group is volunteer-run. Our events are free, and we rely on sponsors to help us
+					secure great venues, provide refreshments, and keep this community going.
+				</p>
+				<div class="py-8 px-6 border border-dashed border-border rounded-xl my-6">
+					<p class="text-foreground/40 text-sm italic text-center">
+						Your brand here — be part of Seoul's creative community
+					</p>
+				</div>
+				<p>
+					Interested in supporting us? We'd love to hear from you.
+				</p>
+				<a
+					href="mailto:hello@seouldesigngroup.com?subject=Sponsorship%20Inquiry"
+					class="inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background font-medium rounded-lg transition-all hover:opacity-90 active:scale-[0.98]"
+				>
+					Become a Sponsor
+				</a>
+			</div>
+		</section>
+
+		<!-- CTA -->
+		<section class="pt-12 text-center">
+			<h2 class="text-2xl font-semibold text-foreground mb-4">Come Say Hello</h2>
+			<p class="text-foreground/70 leading-relaxed mb-8 max-w-lg mx-auto">
+				The best way to experience Seoul Design Group is to show up.
+				Check out our upcoming events and join us at the next one.
+			</p>
+			<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+				<a
+					href={LUMA_URL}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center gap-2 px-7 py-3.5 bg-accent text-white font-medium rounded-lg transition-all hover:opacity-90 hover:shadow-md active:scale-[0.98]"
+				>
+					See upcoming events
+					<IconExternalLink class="size-4 opacity-80" />
+				</a>
+				<a
+					href="/events"
+					class="inline-flex items-center gap-1.5 px-7 py-3.5 border border-border text-foreground font-medium rounded-lg transition-all hover:border-accent hover:text-accent"
+				>
+					Past events
+				</a>
+			</div>
+		</section>
+	</main>
+</Layout>

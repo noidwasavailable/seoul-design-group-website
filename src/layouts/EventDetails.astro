@@ -1,0 +1,134 @@
+---
+import { getPath } from "@/utils/getPath";
+import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Pill from "@/components/Pill.astro";
+import EventImagesViewer from "@/components/EventImagesViewer.astro";
+import { SITE } from "@/config";
+import { slugifyStr } from "@/utils/slugify";
+import IconCalendar from "@/assets/icons/IconCalendar.svg";
+import IconMapPin from "@/assets/icons/IconMapPin.svg";
+import IconExternalLink from "@/assets/icons/IconExternalLink.svg";
+import IconFeather from "@/assets/icons/IconFeather.svg";
+
+type Props = {
+	event: CollectionEntry<"events">;
+};
+
+const { event } = Astro.props;
+const { Content } = await render(event);
+
+const { title, type, date, author, authorLink, location, mapLink } = event.data;
+
+const ogImageUrl = `${getPath(event.id, event.filePath)}/index.png`;
+const ogImage = ogImageUrl
+	? new URL(ogImageUrl, Astro.url.origin).href
+	: undefined;
+
+const layoutProps = {
+	title: `${title} | ${SITE.title}`,
+	description: `${type} event at ${date}`,
+	ogImage,
+};
+
+// Extract the YYYYMMDD directory name from the filePath for image loading
+const eventId =
+	event.filePath
+		?.split("/")
+		.filter(Boolean)
+		.find((seg) => /^\d{8}$/.test(seg)) ?? event.id;
+---
+
+<Layout {...layoutProps}>
+	<Header />
+	<Breadcrumb />
+
+	<main id="main-content" class="pb-16">
+		<!-- Event Header -->
+		<div class="app-layout">
+			<header class="pt-8 pb-8 border-b border-border mb-8">
+				<Pill text={type.toLocaleUpperCase()} />
+				<h1
+					class="text-3xl sm:text-4xl font-bold leading-tight text-foreground mb-5"
+					style={{ viewTransitionName: slugifyStr(title.replaceAll(".", "-")) }}
+				>
+					{title}
+				</h1>
+
+				<div class="flex flex-col gap-2.5">
+					<div
+						class="flex items-center gap-2 text-foreground/70 text-[0.95rem]"
+					>
+						<IconCalendar class="shrink-0 opacity-60 size-[18px]" />
+						<time datetime={date.toISOString()}>
+							{
+								date.toLocaleDateString("ko-KR", {
+									year: "numeric",
+									month: "long",
+									day: "numeric",
+									weekday: "long",
+								})
+							}
+						</time>
+					</div>
+
+					<div
+						class="flex items-center gap-2 text-foreground/70 text-[0.95rem]"
+					>
+						<IconFeather class="shrink-0 opacity-60 size-[18px]" />
+						{
+							authorLink ? (
+								<a
+									href={authorLink}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="text-accent no-underline transition-opacity hover:opacity-80 hover:underline hover:underline-offset-2"
+								>
+									{author}
+								</a>
+							) : (
+								<span>{author}</span>
+							)
+						}
+					</div>
+
+					{
+						location && (
+							<div class="flex items-center gap-2 text-foreground/70 text-[0.95rem]">
+								<IconMapPin class="shrink-0 opacity-60 size-[18px]" />
+								{mapLink ? (
+									<a
+										href={mapLink}
+										target="_blank"
+										rel="noopener noreferrer"
+										class="inline-flex items-center gap-1 text-accent no-underline transition-opacity hover:opacity-80 hover:underline hover:underline-offset-2"
+									>
+										{location}
+										<IconExternalLink class="opacity-50 size-3.5" />
+									</a>
+								) : (
+									<span>{location}</span>
+								)}
+							</div>
+						)
+					}
+				</div>
+			</header>
+		</div>
+
+		<!-- Markdown Content -->
+		<div class="app-layout">
+			<article class="prose prose-lg max-w-none pb-12">
+				<Content />
+			</article>
+		</div>
+
+		<!-- Image Gallery (wider than text content) -->
+		<div class="max-w-6xl mx-auto px-4 sm:px-6">
+			<EventImagesViewer eventId={eventId} eventDate={date} />
+		</div>
+	</main>
+</Layout>

@@ -1,0 +1,24 @@
+---
+import type { GetStaticPaths } from "astro";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import { getPath } from "@/utils/getPath";
+import EventDetails from "@/layouts/EventDetails.astro";
+
+type Props = {
+	event: CollectionEntry<"events">;
+};
+
+export const getStaticPaths = (async () => {
+	const events = await getCollection("events");
+	const eventRes = events.map((event: CollectionEntry<"events">) => ({
+		params: { slug: getPath(event.id, event.filePath, false) },
+		props: { event },
+	}));
+	return eventRes;
+}) satisfies GetStaticPaths;
+
+const { event } = Astro.props;
+---
+
+<EventDetails event={event}/>
