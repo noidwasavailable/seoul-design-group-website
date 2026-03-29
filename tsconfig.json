@@ -12,8 +12,7 @@
 			"@/styles/*": ["./src/styles/*"],
 			"@/utils/*": ["./src/utils/*"],
 			"@/config": ["./src/config"],
-			"@/content.config": ["./src/content.config"],
-			"@/types": ["./src/types"]
+			"@/content.config": ["./src/content.config"]
 		}
 	}
 }
