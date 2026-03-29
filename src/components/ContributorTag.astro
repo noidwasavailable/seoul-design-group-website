@@ -2,7 +2,9 @@
 import IconFeather from "@/assets/icons/IconFeather.svg";
 import IconAperture from "@/assets/icons/IconAperture.svg";
 import IconPerson from "@/assets/icons/IconPerson.svg";
-import type { SDGContributor } from "@/types";
+import type { CollectionEntry } from "astro:content";
+
+type SDGContributor = CollectionEntry<"contributors">["data"];
 
 type Props = {
 	persons: SDGContributor[];

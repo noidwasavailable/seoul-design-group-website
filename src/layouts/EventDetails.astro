@@ -13,6 +13,7 @@ import IconCalendar from "@/assets/icons/IconCalendar.svg";
 import IconMapPin from "@/assets/icons/IconMapPin.svg";
 import IconExternalLink from "@/assets/icons/IconExternalLink.svg";
 import ContributorTag from "@/components/ContributorTag.astro";
+import { getEntries } from "astro:content";
 
 type Props = {
 	event: CollectionEntry<"events">;
@@ -23,6 +24,11 @@ const { Content } = await render(event);
 
 const { title, type, date, authors, photographers, location, mapLink } =
 	event.data;
+
+const authorEntries = (await getEntries(authors)).map((entry) => entry.data);
+const photographerEntries = photographers
+	? (await getEntries(photographers)).map((entry) => entry.data)
+	: [];
 
 const ogImageUrl = `${getPath(event.id, event.filePath)}/index.png`;
 const ogImage = ogImageUrl
@@ -76,8 +82,8 @@ const eventId =
 						</time>
 					</div>
 
-					<ContributorTag persons={authors} type="author" />
-					{photographers && photographers.length > 0 ? <ContributorTag persons={photographers} type="photographer" /> : null}
+					<ContributorTag persons={authorEntries} type="author" />
+					{photographerEntries && photographerEntries.length > 0 ? <ContributorTag persons={photographerEntries} type="photographer" /> : null}
 
 					{
 						location && (

@@ -3,11 +3,9 @@ title: Creative Hangout
 type: meetup
 date: 2026-03-20
 authors:
-  - name: Inès Gruhier
-    link: https://www.linkedin.com/in/ines-gruhier
+  - ines-gruhier
 photographers: 
-  - name: Oscar Sjöstrand
-    link: https://www.instagram.com/osukguri
+  - oscar-sjostrand
 location: ep.platz 은평
 mapLink: https://maps.app.goo.gl/WXt8mNohUp3kwu1h8
 
