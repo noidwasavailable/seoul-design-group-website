@@ -1,0 +1,7 @@
+{
+	"compatibility_date": "2026-03-17",
+	"compatibility_flags": ["global_fetch_strictly_public"],
+	"name": "seouldesigngroup",
+	"pages_build_output_dir": "./dist",
+	"send_metrics": false
+}
