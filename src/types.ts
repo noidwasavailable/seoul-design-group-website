@@ -7,16 +7,23 @@ const httpUrl = z.url({
 	hostname: z.regexes.domain,
 });
 
+const sdgContributorSchema = z.object({
+	name: z.string(),
+	link: httpUrl.optional(),
+});
+
 export const sdgEventSchema = z.object({
 	title: z.string(),
 	type: sdgEventTypeSchema,
 	date: z.coerce.date(),
-	author: z.string(),
-	authorLink: httpUrl.optional(),
+	authors: z.array(sdgContributorSchema),
+	photographers: z.array(sdgContributorSchema).optional(),
 	location: z.string().optional(),
 	mapLink: httpUrl.optional(),
 });
 
-type SDGEventType = z.infer<typeof sdgEventTypeSchema>;
+export type SDGEventType = z.infer<typeof sdgEventTypeSchema>;
+
+export type SDGContributor = z.infer<typeof sdgContributorSchema>;
 
 export type SDGEvent = z.infer<typeof sdgEventSchema>;
