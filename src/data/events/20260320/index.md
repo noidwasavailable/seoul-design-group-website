@@ -1,5 +1,6 @@
 ---
 title: Creative Hangout
+cover: ./images/007.jpeg
 type: meetup
 date: 2026-03-20
 authors:
