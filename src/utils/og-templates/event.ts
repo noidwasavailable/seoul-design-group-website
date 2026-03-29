@@ -12,7 +12,7 @@ const formatDate = (dateLike: string | number | Date) => {
 
 export default async (event: CollectionEntry<"events">["data"]) => {
 	const title = event.title ?? "Seoul Design Group Event";
-	const type = event.type.toUpperCase();
+	const type = event.type.toLocaleUpperCase();
 	const location = event.location ?? "Seoul";
 
 	const dateText = formatDate(event.date);
