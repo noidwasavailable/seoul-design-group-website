@@ -16,24 +16,15 @@ export default defineConfig({
 			exclude: ["@resvg/resvg-js"],
 		},
 	},
-
-	fonts: [
-		{
-			name: "EB Garamond",
-			cssVariable: "--font-garamond",
+	fonts: SITE.fonts.map((name) => {
+		return {
+			name,
+			cssVariable: `--font-${name.toLowerCase().replaceAll(" ", "-")}`,
 			provider: fontProviders.google(),
 			fallbacks: ["serif"],
 			weights: [300, 400, 500, 600, 700],
 			styles: ["normal", "italic"],
-		},
-		{
-			name: "Gowun Batang",
-			cssVariable: "--font-gowun",
-			provider: fontProviders.google(),
-			fallbacks: ["serif"],
-			weights: [300, 400, 500, 600, 700],
-			styles: ["normal", "italic"],
-			subsets: ["korean"],
-		},
-	],
+			subsets: name === "Gowun Batang" ? ["korean"] : undefined,
+		};
+	}),
 });

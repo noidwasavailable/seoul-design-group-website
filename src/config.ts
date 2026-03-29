@@ -4,4 +4,5 @@ export const SITE = {
 	title: "Seoul Design Group",
 	postPerPage: 10,
 	timezone: "Asia/Seoul",
+	fonts: ["EB Garamond", "Gowun Batang"],
 } as const;

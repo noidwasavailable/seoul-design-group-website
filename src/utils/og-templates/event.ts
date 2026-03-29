@@ -13,15 +13,9 @@ const formatDate = (dateLike: string | number | Date) => {
 export default async (event: CollectionEntry<"events">["data"]) => {
 	const title = event.title ?? "Seoul Design Group Event";
 	const type = event.type.toLocaleUpperCase();
-	const location = event.location ?? "Seoul";
 
-	const dateText = formatDate(event.date);
-	const authorsText = Array.isArray(event.authors)
-		? event.authors.join(", ")
-		: (event.authors ?? "");
-
-	const leftMeta = [dateText, location].filter(Boolean).join(" · ");
-	const rightMeta = authorsText ? `Hosted by ${authorsText}` : SITE.title;
+	const leftMeta = formatDate(event.date);
+	const rightMeta = event.location ? `Hosted by ${location}` : "";
 
 	const fontText = `${title} ${type} ${leftMeta} ${rightMeta} ${SITE.title}`;
 

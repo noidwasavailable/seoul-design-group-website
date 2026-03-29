@@ -1,4 +1,5 @@
 import type { FontStyle, FontWeight } from "satori";
+import { SITE } from "@/config";
 
 async function loadGoogleFont(
 	font: string,
@@ -39,21 +40,22 @@ async function loadGoogleFonts(text: string): Promise<
 		style: FontStyle;
 	}>
 > {
-	const fontName = "EB Garamond";
-	const fontsConfig = [
-		{
-			name: fontName,
-			font: fontName.replaceAll(" ", "+"),
-			weight: 400 satisfies FontWeight,
-			style: "normal" satisfies FontStyle,
-		},
-		{
-			name: fontName,
-			font: fontName.replaceAll(" ", "+"),
-			weight: 700 satisfies FontWeight,
-			style: "normal" satisfies FontStyle,
-		},
-	];
+	const fontsConfig = SITE.fonts.flatMap((fontName) => {
+		return [
+			{
+				name: fontName,
+				font: fontName.replaceAll(" ", "+"),
+				weight: 400 satisfies FontWeight,
+				style: "normal" satisfies FontStyle,
+			},
+			{
+				name: fontName,
+				font: fontName.replaceAll(" ", "+"),
+				weight: 700 satisfies FontWeight,
+				style: "normal" satisfies FontStyle,
+			},
+		];
+	});
 
 	const fonts = await Promise.all(
 		fontsConfig.map(async ({ name, font, weight, style }) => {
