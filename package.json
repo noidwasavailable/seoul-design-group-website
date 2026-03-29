@@ -10,8 +10,7 @@
 		"build": "biome check --write . && astro build",
 		"preview": "astro preview",
 		"astro": "astro",
-		"lint": "biome check --write .",
-		"deploy": "bun run build && wrangler pages deploy"
+		"lint": "biome check --write ."
 	},
 	"dependencies": {
 		"@astrojs/sitemap": "^3.7.2",
@@ -26,8 +25,7 @@
 	"devDependencies": {
 		"@biomejs/biome": "2.4.9",
 		"@tailwindcss/typography": "^0.5.19",
-		"@types/lodash.kebabcase": "^4.1.9",
-		"wrangler": "^4.78.0"
+		"@types/lodash.kebabcase": "^4.1.9"
 	},
 	"overrides": {
 		"vite": "^7"
