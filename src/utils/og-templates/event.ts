@@ -10,12 +10,15 @@ const formatDate = (dateLike: string | number | Date) => {
 	return date.toLocaleDateString("ko-KR");
 };
 
-export default async (event: CollectionEntry<"events">["data"]) => {
+export default async (
+	event: CollectionEntry<"events">["data"],
+	image?: Base64URLString,
+) => {
 	const title = event.title ?? "Seoul Design Group Event";
 	const type = event.type.toLocaleUpperCase();
 
 	const leftMeta = formatDate(event.date);
-	const rightMeta = event.location ? `Hosted by ${location}` : "";
+	const rightMeta = event.location ? `Hosted by ${event.location}` : "";
 
 	const fontText = `${title} ${type} ${leftMeta} ${rightMeta} ${SITE.title}`;
 

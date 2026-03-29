@@ -10,7 +10,7 @@
 }
 
 @theme inline {
-	--font-app: var(--font-garamond), var(--font-gowun), serif;
+	--font-app: var(--font-eb-garamond), var(--font-gowun-batang), serif;
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
 	--color-accent: var(--accent);
