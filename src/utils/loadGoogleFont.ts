@@ -1,7 +1,9 @@
+import type { FontStyle, FontWeight } from "satori";
+
 async function loadGoogleFont(
 	font: string,
 	text: string,
-	weight: number,
+	weight: FontWeight,
 ): Promise<ArrayBuffer> {
 	const API = `https://fonts.googleapis.com/css2?family=${font}:wght@${weight}&text=${encodeURIComponent(text)}`;
 
@@ -29,30 +31,39 @@ async function loadGoogleFont(
 	return res.arrayBuffer();
 }
 
-async function loadGoogleFonts(
-	text: string,
-): Promise<
-	Array<{ name: string; data: ArrayBuffer; weight: number; style: string }>
+async function loadGoogleFonts(text: string): Promise<
+	Array<{
+		name: string;
+		data: ArrayBuffer;
+		weight: FontWeight;
+		style: FontStyle;
+	}>
 > {
+	const fontName = "EB Garamond";
 	const fontsConfig = [
 		{
-			name: "IBM Plex Mono",
-			font: "IBM+Plex+Mono",
-			weight: 400,
-			style: "normal",
+			name: fontName,
+			font: fontName.replaceAll(" ", "+"),
+			weight: 400 satisfies FontWeight,
+			style: "normal" satisfies FontStyle,
 		},
 		{
-			name: "IBM Plex Mono",
-			font: "IBM+Plex+Mono",
-			weight: 700,
-			style: "bold",
+			name: fontName,
+			font: fontName.replaceAll(" ", "+"),
+			weight: 700 satisfies FontWeight,
+			style: "normal" satisfies FontStyle,
 		},
 	];
 
 	const fonts = await Promise.all(
 		fontsConfig.map(async ({ name, font, weight, style }) => {
-			const data = await loadGoogleFont(font, text, weight);
-			return { name, data, weight, style };
+			const data = await loadGoogleFont(font, text, weight as FontWeight);
+			return { name, data, weight, style } as {
+				name: string;
+				data: ArrayBuffer;
+				weight: FontWeight;
+				style: FontStyle;
+			};
 		}),
 	);
 

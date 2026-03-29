@@ -1,3 +1,4 @@
+import type { CollectionEntry } from "astro:content";
 import { Resvg } from "@resvg/resvg-js";
 import eventOgImage from "./og-templates/event";
 
@@ -6,7 +7,9 @@ const svgBufferToPngBuffer = (svg: string) => {
 	return resvg.render().asPng();
 };
 
-export const generateOgImagesForEvent = async () => {
-	const svg = await eventOgImage();
+export const generateOgImageForEvent = async (
+	event: CollectionEntry<"events">["data"],
+) => {
+	const svg = await eventOgImage(event);
 	return svgBufferToPngBuffer(svg);
 };
