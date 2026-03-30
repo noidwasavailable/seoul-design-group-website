@@ -2,15 +2,18 @@
 import type { CollectionEntry } from "astro:content";
 import Card from "./Card.astro";
 import LinkButton from "./LinkButton.astro";
+import LumaEvent from "./LumaEvent.astro";
 import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
 import IconExternalLink from "@/assets/icons/IconExternalLink.svg";
+import type { LumaEvent as LumaEventType } from "@/utils/getLumaEvents";
+import { SITE } from "@/config";
 
 type Props = {
 	recentEvents: CollectionEntry<"events">[];
+	upcomingEvents?: LumaEventType[];
 };
 
-const { recentEvents } = Astro.props;
-const LUMA_URL = "https://luma.com/calendar/cal-2e5leJwucrlzWzm";
+const { recentEvents, upcomingEvents } = Astro.props;
 ---
 
 <!-- Hero -->
@@ -27,7 +30,7 @@ const LUMA_URL = "https://luma.com/calendar/cal-2e5leJwucrlzWzm";
 	</p>
 	<div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up-delay-2">
 		<a
-			href={LUMA_URL}
+			href={SITE.luma.LUMA_CALENDAR_URL}
 			target="_blank"
 			rel="noopener noreferrer"
 			class="inline-flex items-center gap-2 px-7 py-3.5 bg-accent text-white font-medium rounded-lg transition-all hover:opacity-90 hover:shadow-md active:scale-[0.98]"
@@ -42,6 +45,38 @@ const LUMA_URL = "https://luma.com/calendar/cal-2e5leJwucrlzWzm";
 			Learn more
 			<IconArrowRight class="size-4" />
 		</a>
+	</div>
+</section>
+
+<!-- Upcoming Events -->
+<section class="app-layout pb-16">
+	<div class="border-t border-border pt-12">
+		<div class="flex items-baseline justify-between mb-4">
+			<h2 class="text-2xl sm:text-3xl font-semibold text-foreground">
+				Upcoming Events
+			</h2>
+			<a
+				href={SITE.luma.LUMA_CALENDAR_URL}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="text-sm font-medium text-accent hover:underline underline-offset-4 inline-flex items-center gap-1"
+			>
+				View calendar on Luma
+				<IconExternalLink class="size-3.5 opacity-70" />
+			</a>
+		</div>
+
+		{upcomingEvents &&upcomingEvents.length > 0 ? (
+			<ul class="space-y-3">
+				{upcomingEvents.slice(0, 3).map((event) => (<LumaEvent event={event} />))}
+			</ul>
+		) : (
+			<div class="rounded-xl border border-dashed border-border p-4 sm:p-5">
+				<p class="text-sm text-foreground/70 mb-3">
+					No upcoming events listed right now.
+				</p>
+			</div>
+		)}
 	</div>
 </section>
 
@@ -105,7 +140,7 @@ const LUMA_URL = "https://luma.com/calendar/cal-2e5leJwucrlzWzm";
 				you're welcome here. Follow us on Luma and join the next event.
 			</p>
 			<a
-				href={LUMA_URL}
+				href={SITE.luma.LUMA_CALENDAR_URL}
 				target="_blank"
 				rel="noopener noreferrer"
 				class="inline-flex items-center gap-2 px-7 py-3.5 bg-accent text-white font-medium rounded-lg transition-all hover:opacity-90 hover:shadow-md active:scale-[0.98]"

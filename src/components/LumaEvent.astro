@@ -1,0 +1,70 @@
+---
+import { SITE } from "@/config";
+import type { LumaEvent } from "@/utils/getLumaEvents";
+import IconMapPin from "@/assets/icons/IconMapPin.svg";
+
+type Props = {
+	event: LumaEvent;
+};
+
+const { event } = Astro.props;
+
+const dateTimeFormatter = new Intl.DateTimeFormat("ko-KR", {
+	dateStyle: "medium",
+	timeStyle: "short",
+	timeZone: "Asia/Seoul",
+});
+
+const formatEventDateTime = (startAt: string, endAt: string | null): string => {
+	const startLabel = dateTimeFormatter.format(new Date(startAt));
+	if (!endAt) return `${startLabel} (KST)`;
+	const endLabel = dateTimeFormatter.format(new Date(endAt));
+	return `${startLabel} - ${endLabel} (KST)`;
+};
+---
+
+<li class="rounded-xl border border-border p-4 sm:p-5">
+	<h3 class="text-base sm:text-lg font-medium text-foreground leading-snug">
+		<a
+			href={event.url.replaceAll(SITE.luma.LUMA_API_BASE_URL, SITE.luma.LUMA_BASE_URL)}
+			target="_blank"
+			rel="noopener noreferrer"
+			class="hover:text-accent transition-colors"
+		>
+			{event.name}
+		</a>
+	</h3>
+	<p class="text-sm text-foreground/70 mt-1">
+		{formatEventDateTime(event.startAt, event.endAt)}
+	</p>
+	{event.locationText && (
+		<p class="text-sm text-foreground/65 mt-1">
+		{event.googleMapsUrl ?
+		    <a href={event.googleMapsUrl}
+          		target="_blank"
+          		rel="noopener noreferrer"
+          		class="hover:text-accent transition-colors"
+            >
+                {event.locationText} <IconMapPin class="size-3.5 inline-block ml-1 -translate-y-0.5" />
+            </a>
+            :
+            event.locationText
+            }
+		</p>
+	)}
+	<div class="flex flex-wrap items-center gap-2 mt-3">
+		{event.isFree !== null && (
+			<span class="px-2 py-1 text-xs rounded-full border border-border bg-background text-foreground/80">
+				{event.isFree ? "Free" : "Paid"}
+			</span>
+		)}
+		{event.isSoldOut !== null && (
+			<span class="px-2 py-1 text-xs rounded-full border border-border bg-background text-foreground/80">
+				{event.isSoldOut ? "Sold out" : "Available"}
+			</span>
+		)}
+		{typeof event.guestCount === "number" && (
+			<span class="text-xs text-foreground/60">{event.guestCount} guests</span>
+		)}
+	</div>
+</li>
