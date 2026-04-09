@@ -32,6 +32,7 @@ const events = defineCollection({
 			photographers: z.array(reference("contributors")).optional(),
 			location: z.string().optional(),
 			mapLink: httpUrl.optional(),
+			lumaLink: httpUrl.optional(),
 		}),
 });
 

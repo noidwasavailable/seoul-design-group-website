@@ -5,12 +5,14 @@ import Header from "@/components/Header.astro";
 import { getCollection } from "astro:content";
 import { SITE } from "@/config";
 import getSortedPosts from "@/utils/getSortedPosts";
+import { getLumaUpcomingEvents } from "@/utils/getLumaEvents";
 
 const events = await getCollection("events");
 const recentEvents = getSortedPosts(events).slice(0, 3);
+const upcomingEvents = await getLumaUpcomingEvents();
 ---
 
 <Layout title={SITE.title} description={SITE.desc}>
     <Header />
-    <Welcome recentEvents={recentEvents} />
+    <Welcome recentEvents={recentEvents} upcomingEvents={upcomingEvents} />
 </Layout>

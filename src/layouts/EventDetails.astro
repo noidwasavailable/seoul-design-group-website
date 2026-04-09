@@ -22,8 +22,16 @@ type Props = {
 const { event } = Astro.props;
 const { Content } = await render(event);
 
-const { title, type, date, authors, photographers, location, mapLink } =
-	event.data;
+const {
+	title,
+	type,
+	date,
+	authors,
+	photographers,
+	location,
+	mapLink,
+	lumaLink,
+} = event.data;
 
 const authorEntries = (await getEntries(authors)).map((entry) => entry.data);
 const photographerEntries = photographers
@@ -57,7 +65,9 @@ const eventId =
 		<!-- Event Header -->
 		<div class="app-layout">
 			<header class="pt-8 pb-8 border-b border-border mb-8">
+			    <!-- Event Type -->
 				<Pill text={type.toLocaleUpperCase()} />
+				<!-- Title -->
 				<h1
 					class="text-3xl sm:text-4xl font-bold leading-tight text-foreground mb-5"
 					style={{ viewTransitionName: slugifyStr(title.replaceAll(".", "-")) }}
@@ -65,6 +75,7 @@ const eventId =
 					{title}
 				</h1>
 
+				<!-- Date -->
 				<div class="flex flex-col gap-2.5">
 					<div
 						class="flex items-center gap-2 text-foreground/70 text-[0.95rem]"
@@ -82,9 +93,12 @@ const eventId =
 						</time>
 					</div>
 
+					<!-- Authors -->
 					<ContributorTag persons={authorEntries} type="author" />
+					<!-- Photographers -->
 					{photographerEntries && photographerEntries.length > 0 ? <ContributorTag persons={photographerEntries} type="photographer" /> : null}
 
+					<!-- Location Information & Map Link -->
 					{
 						location && (
 							<div class="flex items-center gap-2 text-foreground/70 text-[0.95rem]">
@@ -105,6 +119,22 @@ const eventId =
 							</div>
 						)
 					}
+
+					<!-- Luma Link -->
+                    {
+                        lumaLink && (
+                            <div class="flex items-center gap-2 text-foreground/70 text-[0.95rem]">
+                                <IconExternalLink class="shrink-0 opacity-60 size-4.5" />
+                                <a
+                                    href={lumaLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center gap-1 text-accent no-underline transition-opacity hover:opacity-80 hover:underline hover:underline-offset-2"
+                                >
+                                    View on Luma
+                                </a>
+                            </div>
+                    )}
 				</div>
 			</header>
 		</div>

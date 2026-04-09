@@ -9,6 +9,7 @@ photographers:
   - oscar-sjostrand
 location: ep.platz 은평
 mapLink: https://maps.app.goo.gl/WXt8mNohUp3kwu1h8
+lumaLink: https://luma.com/3d7dwzbd
 
 ---
 
