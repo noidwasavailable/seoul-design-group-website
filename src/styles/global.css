@@ -7,6 +7,7 @@
 	--accent: #006cac;
 	--muted: #e6e6e6;
 	--border: #ece9e9;
+	--brand-discord: #5865f2;
 }
 
 @theme inline {
@@ -16,6 +17,7 @@
 	--color-accent: var(--accent);
 	--color-muted: var(--muted);
 	--color-border: var(--border);
+	--color-brand-discord: var(--brand-discord);
 }
 
 @layer base {

@@ -4,8 +4,6 @@ import Header from "@/components/Header.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
 import { SITE } from "@/config";
 import IconExternalLink from "@/assets/icons/IconExternalLink.svg";
-
-const LUMA_URL = "https://luma.com/calendar/cal-2e5leJwucrlzWzm";
 ---
 
 <Layout title={`About | ${SITE.title}`} description="Learn about Seoul Design Group — a community of designers, artists, and creatives based in Seoul, Korea.">
@@ -51,15 +49,28 @@ const LUMA_URL = "https://luma.com/calendar/cal-2e5leJwucrlzWzm";
 				<p>
 					All our events are free and open to everyone. We announce them on Luma — follow our calendar to stay in the loop:
 				</p>
-				<a
-					href={LUMA_URL}
-					target="_blank"
-					rel="noopener noreferrer"
-					class="inline-flex items-center gap-2 text-accent font-medium hover:underline underline-offset-4 transition-colors"
-				>
-					Seoul Design Group on Luma
-					<IconExternalLink class="size-3.5 opacity-60" />
-				</a>
+				<p>
+    				<a
+    					href={SITE.luma.LUMA_CALENDAR_URL}
+    					target="_blank"
+    					rel="noopener noreferrer"
+    					class="inline-flex items-center gap-2 text-accent font-medium hover:underline underline-offset-4 transition-colors"
+    				>
+    					Seoul Design Group on Luma
+    					<IconExternalLink class="size-3.5 opacity-60" />
+    				</a>
+				</p>
+				<p>
+    				<a
+    					href={SITE.discord.DISCORD_INVITE_URL}
+    					target="_blank"
+    					rel="noopener noreferrer"
+    					class="inline-flex items-center gap-2 text-brand-discord font-medium hover:underline underline-offset-4 transition-colors"
+    				>
+    					Seoul Design Group on Discord
+    					<IconExternalLink class="size-3.5 opacity-60" />
+    				</a>
+				</p>
 			</div>
 		</section>
 
@@ -112,7 +123,7 @@ const LUMA_URL = "https://luma.com/calendar/cal-2e5leJwucrlzWzm";
 			</p>
 			<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
 				<a
-					href={LUMA_URL}
+					href={SITE.luma.LUMA_CALENDAR_URL}
 					target="_blank"
 					rel="noopener noreferrer"
 					class="inline-flex items-center gap-2 px-7 py-3.5 bg-accent text-white font-medium rounded-lg transition-all hover:opacity-90 hover:shadow-md active:scale-[0.98]"

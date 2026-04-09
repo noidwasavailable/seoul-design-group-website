@@ -59,10 +59,19 @@ const formatEventDateTime = (startAt: string, endAt: string | null): string => {
 			</span>
 		)}
 		{event.isSoldOut !== null && (
-			<span class="px-2 py-1 text-xs rounded-full border border-border bg-background text-foreground/80">
-				{event.isSoldOut ? "Sold out" : "Available"}
-			</span>
-		)}
+			<a
+				class={`px-2 py-1 text-xs rounded-full border border-border bg-background text-foreground/80 ${
+					event.isSoldOut && event.waitlistActive
+						? "transition-colors hover:text-accent hover:border-accent/50"
+						: "cursor-default"
+				}`}
+				href={event.isSoldOut && event.waitlistActive ? `${event.url.replaceAll(SITE.luma.LUMA_API_BASE_URL, SITE.luma.LUMA_BASE_URL)}` : undefined}
+				target={event.isSoldOut && event.waitlistActive ? "_blank" : undefined}
+				rel={event.isSoldOut && event.waitlistActive ? "noopener noreferrer" : undefined}
+			>
+				{event.isSoldOut ? event.waitlistActive ? "Join Waitlist on Luma" : "Sold out" : "Available"}
+			</a>
+)}
 		{typeof event.guestCount === "number" && (
 			<span class="text-xs text-foreground/60">{event.guestCount} guests</span>
 		)}
